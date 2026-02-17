@@ -1,0 +1,115 @@
+
+version: "3.8"
+
+networks:
+    laravel:
+        driver: bridge
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laragym-app
+        restart: unless-stopped
+        working_dir: /var/www
+        environment:
+            - DB_HOST=mysql
+            - DB_PORT=3306
+            - DB_DATABASE=${DB_DATABASE}
+            - DB_USERNAME=${DB_USERNAME}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - REDIS_HOST=redis
+        volumes:
+            - .:/var/www
+        networks:
+            - laravel
+        depends_on:
+            - mysql
+            - redis
+
+    nginx:
+        image: nginx:alpine
+        container_name: laragym-nginx
+        restart: unless-stopped
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/var/www
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - laravel
+        depends_on:
+            - app
+
+    mysql:
+        image: mysql:8.0
+        container_name: laragym-mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        command: --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
+        volumes:
+            - ./storage/mysql:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        networks:
+            - laravel
+
+    redis:
+        image: redis:alpine
+        container_name: laragym-redis
+        restart: unless-stopped
+        ports:
+            - "6379:6379"
+        networks:
+            - laravel
+
+    mailhog:
+        image: mailhog/mailhog:latest
+        container_name: laragym-mailhog
+        restart: unless-stopped
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+        networks:
+            - laravel
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        container_name: laragym-phpmyadmin
+        restart: unless-stopped
+        ports:
+            - "8080:80"
+        environment:
+            PMA_HOST: mysql
+            PMA_USER: ${DB_USERNAME}
+            PMA_PASSWORD: ${DB_PASSWORD}
+            PMA_DB: ${DB_DATABASE}
+        networks:
+            - laravel
+        depends_on:
+            - mysql
+
+    sveltekit-dev:
+        build:
+            context: ./resources/apps/admin
+            dockerfile: Dockerfile.dev
+        container_name: laragym-sveltekit-dev
+        restart: unless-stopped
+        ports:
+            - "5173:5173"
+        volumes:
+            - ./resources/apps/admin:/app
+            - /app/node_modules
+        working_dir: /app
+        command: npm run dev
+        networks:
+            - laravel
+        environment:
+            - VITE_API_URL=http://localhost:8000
