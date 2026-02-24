@@ -54,7 +54,7 @@ RUN mkdir -p storage/logs bootstrap/cache \
     && find bootstrap/cache -type f -exec chmod 664 {} \;
 
 # Instala dependencias PHP
-RUN composer update --no-interaction --prefer-dist
+RUN rm -f composer.lock && composer update --no-interaction --prefer-dist --with-all-dependencies
 
 # Instala dependencias Node y construye assets
 RUN npm ci && npm run build

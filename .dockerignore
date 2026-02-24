@@ -17,3 +17,14 @@ coverage
 auth.json
 public/storage
 resources/apps/*/node_modules
+vendor
+composer.lock
+resources/apps/*/node_modules
+.env
+.env.local
+dist
+build
+.pytest_cache
+__pycache__
+.next
+out

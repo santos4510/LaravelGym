@@ -1,9 +1,11 @@
-
-version: "3.8"
-
 networks:
     laravel:
         driver: bridge
+
+volumes:
+    laravel-vendor:
+    laravel-node-modules:
+    laravel-storage:
 
 services:
     app:
@@ -22,6 +24,9 @@ services:
             - REDIS_HOST=redis
         volumes:
             - .:/var/www
+            - laravel-vendor:/var/www/vendor
+            - laravel-node-modules:/var/www/node_modules
+            - laravel-storage:/var/www/storage
         networks:
             - laravel
         depends_on:
