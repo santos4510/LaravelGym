@@ -1,4 +1,4 @@
-﻿FROM php:8.2-fpm-alpine
+﻿FROM php:8.3-fpm-alpine
 
 RUN apk update && apk upgrade --no-cache \
     && apk add --no-cache \
@@ -53,11 +53,6 @@ RUN mkdir -p storage/logs bootstrap/cache \
     && find storage -type f -exec chmod 664 {} \; \
     && find bootstrap/cache -type f -exec chmod 664 {} \;
 
-# Instala dependencias PHP
-RUN rm -f composer.lock && composer update --no-interaction --prefer-dist --with-all-dependencies
-
-# Instala dependencias Node y construye assets
-RUN npm ci && npm run build
 
 # Copiar el script de entrada  
 COPY docker-entrypoint.sh /usr/local/bin/

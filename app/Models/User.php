@@ -108,4 +108,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new ForgotPassword($token));
     }
+    /**
+     * Send the email verification notification using the custom notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\VerifyEmail);
+    }
 }

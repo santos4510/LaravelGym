@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['prefix' => 'auth', 'middleware' => 'rate.limit.auth'], function () {
+Route::group(['prefix' => 'auth'], function () {
     Route::post('register', 'AuthController@register')->name('auth.register');
     Route::post('login', 'AuthController@login')->name('auth.login');
     Route::post('logout', 'AuthController@logout')->middleware('auth:sanctum')->name('auth.logout');
     Route::post('refresh', 'AuthController@refresh')->middleware('auth:sanctum')->name('auth.refresh');
-    Route::post('verify/{id}/{hash}', 'AuthController@verify')->name('verification.verify');
+    Route::post('verify/{id}/{hash}', 'AuthController@verify')->name('api.verification.verify');
     Route::post('resend', 'AuthController@resend')->name('verification.resend');
     Route::post('forgot', 'AuthController@forgot')->name('auth.forgot');
     Route::post('reset', 'AuthController@reset')->name('password.reset');
