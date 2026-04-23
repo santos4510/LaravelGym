@@ -1,135 +1,85 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LaraGym - Treina Mais Forte com IA</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @endif
-    <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaraGym - IA Fitness System</title>
+    
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'monospace'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">LARAGYM</div>
-        <ul class="nav-links">
-            <li><a href="#features">Funcionalidades</a></li>
-            <li><a href="#pricing">Planos</a></li>
-        </ul>
-        <div>
-            @if (Route::has('login'))
-                <div>
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
+<body class="h-full">
+    <div id="app" class="w-full h-full overflow-auto bg-black text-green-400 font-rajdhani grid-bg">
+        
+        <nav class="fixed top-0 left-0 w-full z-50 bg-black/90 border-b border-green-900/50 backdrop-blur-sm">
+            <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 border-2 border-green-400 rotate-45 flex items-center justify-center">
+                        <i data-lucide="zap" class="w-4 h-4 -rotate-45 text-green-400"></i>
+                    </div>
+                    <span class="font-orbitron font-bold text-lg tracking-widest text-green-400 flicker">LARAGYM</span>
                 </div>
-            @endif
-        </div>
-    </nav>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <span class="badge">POWERED BY AI</span>
-            <h1>TREINA MAIS FORTE</h1>
-            <h2>COM INTELIGÊNCIA ARTIFICIAL</h2>
-            <p>Planos de treino personalizados, gerados por IA, adaptados aos teus objetivos e nível de experiência.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary">COMEÇAR AGORA</button>
-                <button class="btn btn-secondary">JÁ TENS CONTA? ENTRAR</button>
+
+                <div class="hidden md:flex gap-8 font-orbitron text-xs tracking-wider">
+                    <a href="#features" class="hover:text-green-300 transition-colors uppercase">Funcionalidades</a>
+                    <a href="#pricing" class="hover:text-green-300 transition-colors uppercase">Planos</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    @if (Route::has('login'))
+                        @auth
+                            <a href="{{ url('/dashboard') }}" class="font-orbitron text-xs border border-green-500 px-4 py-2 hover:bg-green-500 hover:text-black transition-all">
+                                DASHBOARD_
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="font-orbitron text-xs text-green-400 hover:text-white transition-colors">
+                                LOGIN
+                            </a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="font-orbitron text-xs bg-green-500/10 border border-green-500 px-4 py-2 text-green-400 hover:bg-green-500 hover:text-black transition-all">
+                                    REGISTER
+                                </a>
+                            @endif
+                        @endauth
+                    @endif
+                    <button id="mobile-menu-btn" class="md:hidden text-green-400"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                </div>
             </div>
-        </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1677658139949-0378cc902911?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNDR8MHwxfHNlYXJjaHwxfHxpbnRlbnNlJTIwZ3ltJTIwd29ya291dCUyMGRhcmslMjBhZXN0aGV0aWMlMjBsaWdodGluZ3xlbnwwfHx8fDE3NzA2NDMwNzd8MA&ixlib=rb-4.1.0&q=85" alt="Gym atmosphere">
-        </div>
-    </section>
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="features-title">
-            <h2>FUNCIONALIDADES</h2>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>IA Personal Trainer</h3>
-                <p>Planos de treino personalizados gerados por inteligência artificial.</p>
+        </nav>
+
+        <header class="relative min-h-[600px] flex items-center justify-center cyber-scanline overflow-hidden pt-16 hex-pattern" style="min-height: 90%;">
+            <div class="absolute inset-0 pointer-events-none opacity-20">
+                <div class="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500 to-transparent"></div>
+                <div class="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-green-500 to-transparent"></div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3>Biblioteca de Exercícios</h3>
-                <p>Mais de 20 exercícios com instruções detalhadas.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Registo de Progresso</h3>
-                <p>Acompanha a tua evolução com gráficos e estatísticas.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📅</div>
-                <h3>Calendário de Treinos</h3>
-                <p>Organiza os teus treinos semanais e mensais.</p>
-            </div>
-        </div>
-    </section>
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <div class="pricing-title">
-            <h2>PLANOS</h2>
-        </div>
-        <div class="pricing-grid">
-            <!-- Free Plan -->
-            <div class="pricing-card">
-                <h3>GRATUITO</h3>
-                <div class="price">0<span style="font-size: 1rem; color: #999;">/mês</span></div>
-                <div class="price-period"></div>
-                <ul class="pricing-features">
-                    <li>Biblioteca de exercícios</li>
-                    <li>Registo de treinos</li>
-                    <li>Calendário básico</li>
-                </ul>
-                <button class="btn btn-secondary">COMEÇAR AGORA</button>
-            </div>
-            <!-- Basic Plan (Popular) -->
-            <div class="pricing-card popular">
-                <div class="popular-badge">POPULAR</div>
-                <h3>BÁSICO</h3>
-                <div class="price">29.99<span style="font-size: 1rem; color: #999;">/mês</span></div>
-                <div class="price-period"></div>
-                <ul class="pricing-features">
-                    <li>Tudo do plano gratuito</li>
-                    <li>IA Personal Trainer</li>
-                    <li>Planos personalizados</li>
-                </ul>
-                <button class="btn btn-primary">SUBSCREVER</button>
-            </div>
-            <!-- Premium Plan -->
-            <div class="pricing-card">
-                <h3>PREMIUM</h3>
-                <div class="price">49.99<span style="font-size: 1rem; color: #999;">/mês</span></div>
-                <div class="price-period"></div>
-                <ul class="pricing-features">
-                    <li>Tudo do plano básico</li>
-                    <li>Calendário avançado</li>
-                    <li>Suporte prioritário</li>
-                    <li>Relatórios de progresso</li>
-                </ul>
-                <button class="btn btn-primary">SUBSCREVER</button>
-            </div>
-        </div>
-    </section>
-    <!-- Footer -->
-    <footer class="footer">
-        <p><strong>LARAGYM</strong></p>
-        <p>© 2026 LaraGym. Powered by AI.</p>
-        <p><a href="https://app.emergent.sh/?utm_source=emergent-badge">Made with Emergent</a></p>
-    </footer>
-</body>
-</html>
+
+            <div class="relative z-10 text-center px-4 max-w-4xl">
+                <div class="inline-block mb-6 px-4 py-1 border border-green-800 bg-green-950/30 font-orbitron text-xs tracking-[0.3em] text-green-500">
+                    ▸ POWERED BY AI ▸ LARAGYM_OS v2.0
+                </div>
+                <h1 class="font-orbitron font-black text-5xl sm:text-7xl md:text-8xl leading-none mb-4 text-glow text-green-400 glitch-hover">
+                    TREINA MAIS FORTE
+                </h1>
+                <p class="font-rajdhani text-xl sm:text-2xl md:text-3xl font-light tracking-wider text-green-300/80 mb-10 uppercase">
+                    Com Inteligência Artificial adaptada ao teu nível.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="font-orbitron text-sm tracking-widest px-10 py-4 bg

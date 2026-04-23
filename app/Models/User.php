@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\ForgotPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,8 +13,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
-
-    protected $appends = ['initial'];
 
     /**
      * The attributes that are mass assignable.
@@ -62,59 +59,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class);
     }
 
-    /**
-     * The "booted" method of the model.
-     */
-    protected static function booted(): void
+    public function attendances()
     {
-        static::created(function (User $user) {
-            $user->account_number = User::generateAccountNumber($user->id);
-            $user->profile()->save(new Profile());
-            $user->save();
-        });
-    }
-
-    public static function generateAccountNumber(int $input): string
-    {
-        return str_pad($input, 12, "0", STR_PAD_LEFT);
-    }
-
-    public function getPersonalAccessToken()
-    {
-        $tokenResult = $this->createToken('Personal Access Token');
-
-        $token = $tokenResult->plainTextToken;
-
-        return $token;
-    }
-
-    public function getInitialAttribute()
-    {
-        $words = explode(' ', $this->name);
-        return mb_strtoupper(
-            mb_substr($words[0], 0, 1, 'UTF-8') .
-            mb_substr(end($words), 0, 1, 'UTF-8'),
-            'UTF-8'
-        );
-    }
-
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ForgotPassword($token));
-    }
-    /**
-     * Send the email verification notification using the custom notification.
-     *
-     * @return void
-     */
-    public function sendEmailVerificationNotification()
-    {
-        $this->notify(new \App\Notifications\VerifyEmail);
+        return $this->hasMany(Attendance::class);
     }
 }

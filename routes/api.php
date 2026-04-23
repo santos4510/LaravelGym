@@ -40,5 +40,3 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/users/{user}/avatar', 'UserAvatarController@store');
     });
 });
-
-

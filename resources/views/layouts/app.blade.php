@@ -5,32 +5,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'LaraGym') }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @stack('styles') 
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <body class="font-sans antialiased bg-[#050509]"> {{-- Fondo Negro Profundo --}}
+        <div class="min-h-screen bg-[#050509]">
+            {{-- La Navbar Cyberpunk --}}
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
+            {{-- Encabezado de página (Opcional, con estilo glitch) --}}
             @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
+                <header class="bg-[#0c0c16] border-b border-neon-fuchsia/10 shadow-[0_4px_15px_rgba(255,0,119,0.05)]">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
             @endisset
 
-            <!-- Page Content -->
+            {{-- Contenido Principal (El Dashboard) --}}
             <main>
                 {{ $slot }}
             </main>
         </div>
+
+        @stack('scripts')
     </body>
 </html>

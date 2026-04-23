@@ -1,0 +1,113 @@
+/* public/css/dashboar.css */
+
+/* 1. Configuración de Fuentes y Colores */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Orbitron:wght@700;900&display=swap');
+
+:root {
+    --neon-green: #39ff14;
+    --dark-bg: #0d0d14;
+    --card-bg: #1a1a2e;
+    --glass: rgba(255, 255, 255, 0.03);
+}
+
+/* 2. Estilo Global */
+.gym-body {
+    background-color: var(--dark-bg) !important;
+    min-height: 100vh;
+    font-family: 'Rajdhani', sans-serif;
+    color: white;
+}
+.font-display { 
+    font-family: 'Orbitron', sans-serif; 
+}
+
+.text-neon { 
+    color: var(--neon-green);
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+}
+
+/* 3. Tarjetas (Glassmorphism + Neon) */
+.card-neon {
+    background: linear-gradient(145deg, #1a1a2e 0%, #12121c 100%);
+    border: 1px solid rgba(57, 255, 20, 0.1);
+    border-radius: 1.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.card-neon:hover {
+    transform: translateY(-5px);
+    border-color: rgba(57, 255, 20, 0.3);
+}
+
+/* 4. Sistema de Racha (Días) */
+.day-dot {
+    width: 35px;
+    height: 35px;
+    background: #252538;
+    color: #555;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid transparent;
+}
+
+/* Clase que activa el JS */
+.active-neon {
+    background: rgba(57, 255, 20, 0.15) !important;
+    border: 1px solid var(--neon-green) !important;
+    color: var(--neon-green) !important;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+    transform: scale(1.1);
+}
+
+/* 5. Botón de Check-in */
+.btn-checkin-neon {
+    background: transparent;
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+}
+
+.btn-checkin-neon:hover:not(:disabled) {
+    background: var(--neon-green);
+    color: #0d0d14;
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.6);
+}
+
+.btn-checkin-neon:disabled {
+    border-color: #333;
+    color: #555;
+    cursor: not-allowed;
+}
+
+/* 6. Animaciones */
+@keyframes pulse-neon {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; text-shadow: 0 0 15px var(--neon-green); }
+}
+
+.streak-glow {
+    position: relative;
+}
+
+.streak-glow::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 1.25rem;
+    box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.05);
+    pointer-events: none;
+}
