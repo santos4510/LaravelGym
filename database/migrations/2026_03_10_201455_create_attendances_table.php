@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendances', function (Blueprint \) {
-            \->id();
-            \->foreignId('user_id')->constrained()->onDelete('cascade');
-            \->date('date');
-            \->timestamps();
+        Schema::create('attendances', functiodn (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->date('date');
+            $table->timestamps();
 
-            \->unique(['user_id', 'date']);
+            $table->unique(['user_id', 'date']);
         });
     }
 
