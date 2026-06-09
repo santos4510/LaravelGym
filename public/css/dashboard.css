@@ -1,77 +1,86 @@
-/* public/css/dashboar.css */
+/* public/css/dashboard.css */
 
-/* 1. Configuración de Fuentes y Colores */
+/* 1. Configuração de Fontes e Cores (Alinhado com a Home) */
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Orbitron:wght@700;900&display=swap');
 
 :root {
-    --neon-green: #39ff14;
-    --dark-bg: #0d0d14;
-    --card-bg: #1a1a2e;
-    --glass: rgba(255, 255, 255, 0.03);
+    --neon-green: #00ff41; /* Teu verde original */
+    --dark-bg: #000000;    /* Teu preto original */
+    --card-bg: #0a0a0a;    /* Cinza quase preto para os cards */
+    --border-alpha: rgba(0, 255, 65, 0.1);
 }
 
-/* 2. Estilo Global */
+/* 2. Estilo Global com os teus padrões de fundo */
 .gym-body {
     background-color: var(--dark-bg) !important;
+    background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
     min-height: 100vh;
     font-family: 'Rajdhani', sans-serif;
     color: white;
 }
+
 .font-display { 
     font-family: 'Orbitron', sans-serif; 
 }
 
 .text-neon { 
     color: var(--neon-green);
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
 }
 
-/* 3. Tarjetas (Glassmorphism + Neon) */
+/* 3. Tarjetas (Cyber-Border + Neon) */
 .card-neon {
-    background: linear-gradient(145deg, #1a1a2e 0%, #12121c 100%);
-    border: 1px solid rgba(57, 255, 20, 0.1);
-    border-radius: 1.25rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
+    background: var(--card-bg);
+    border: 1px solid var(--border-alpha);
+    border-radius: 0.5rem; /* Bordas mais retas combinam mais com Cyberpunk */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .card-neon:hover {
     transform: translateY(-5px);
-    border-color: rgba(57, 255, 20, 0.3);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
 }
 
 /* 4. Sistema de Racha (Días) */
 .day-dot {
     width: 35px;
     height: 35px;
-    background: #252538;
-    color: #555;
-    border-radius: 10px;
+    background: #111;
+    color: #444;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
     font-weight: bold;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid transparent;
+    border: 1px solid #222;
 }
 
-/* Clase que activa el JS */
+/* Ativação do Dia com o teu Verde */
 .active-neon {
-    background: rgba(57, 255, 20, 0.15) !important;
+    background: rgba(0, 255, 65, 0.1) !important;
     border: 1px solid var(--neon-green) !important;
     color: var(--neon-green) !important;
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
     transform: scale(1.1);
+    text-shadow: 0 0 5px var(--neon-green);
 }
 
-/* 5. Botón de Check-in */
+/* 5. Botão de Check-in (Estilo Cyber-Border) */
 .btn-checkin-neon {
     background: transparent;
     border: 1px solid var(--neon-green);
     color: var(--neon-green);
     padding: 14px;
-    border-radius: 12px;
+    border-radius: 4px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -83,8 +92,9 @@
 
 .btn-checkin-neon:hover:not(:disabled) {
     background: var(--neon-green);
-    color: #0d0d14;
-    box-shadow: 0 0 25px rgba(57, 255, 20, 0.6);
+    color: black;
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
+    animation: glitch 0.3s ease-in-out; /* Aplicando o teu glitch no hover */
 }
 
 .btn-checkin-neon:disabled {
@@ -93,21 +103,35 @@
     cursor: not-allowed;
 }
 
-/* 6. Animaciones */
-@keyframes pulse-neon {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; text-shadow: 0 0 15px var(--neon-green); }
+/* 6. Integração das tuas Animações da Home */
+@keyframes glitch {
+    0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    20% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 2px); }
+    40% { clip-path: inset(60% 0 10% 0); transform: translate(3px, -2px); }
+    60% { clip-path: inset(40% 0 30% 0); transform: translate(-2px, 1px); }
+    80% { clip-path: inset(10% 0 70% 0); transform: translate(2px, -1px); }
 }
 
-.streak-glow {
-    position: relative;
+/* Scanline para os cards (opcional, aplicar via classe) */
+.cyber-scanline::after {
+    content: '';
+    position: absolute;
+    left: 0; width: 100%; height: 4px;
+    background: linear-gradient(transparent, rgba(0,255,65,0.15), transparent);
+    animation: scanline 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scanline {
+    0% { top: -10%; }
+    100% { top: 110%; }
 }
 
 .streak-glow::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 1.25rem;
-    box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.05);
+    border-radius: 0.5rem;
+    box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
     pointer-events: none;
 }

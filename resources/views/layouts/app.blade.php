@@ -9,7 +9,8 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-
+        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+        
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         @stack('styles') 

@@ -38,13 +38,17 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <span class="badge">POWERED BY AI</span>
             <h1>TREINA MAIS FORTE</h1>
             <h2>COM INTELIGÊNCIA ARTIFICIAL</h2>
             <p>Planos de treino personalizados, gerados por IA, adaptados aos teus objetivos e nível de experiência.</p>
             <div class="hero-buttons">
-                <button class="btn btn-primary">COMEÇAR AGORA</button>
-                <button class="btn btn-secondary">JÁ TENS CONTA? ENTRAR</button>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="btn btn-primary" style="text-decoration: none; display: inline-block; text-align: center;">COMEÇAR AGORA</a>
+                @endif
+                
+                @if (Route::has('login'))
+                    <a href="{{ route('login') }}" class="btn btn-secondary" style="text-decoration: none; display: inline-block; text-align: center;">JÁ TENS CONTA? ENTRAR</a>
+                @endif
             </div>
         </div>
         <div class="hero-image">
@@ -58,27 +62,24 @@
         </div>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🤖</div>
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Personal Trainer Icon">
                 <h3>IA Personal Trainer</h3>
-                <p>Planos de treino personalizados gerados por inteligência artificial.</p>
+                <p>Planos de treino personalizados, gerados por IA, adaptados aos teus objetivos e nível de experiência.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3>Biblioteca de Exercícios</h3>
-                <p>Mais de 20 exercícios com instruções detalhadas.</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Progress Tracking Icon">
+                <h3>Acompanhamento de Progresso</h3>
+                <p>Regista os teus treinos, acompanha o teu progresso e ajusta os teus planos conforme necessário.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Registo de Progresso</h3>
-                <p>Acompanha a tua evolução com gráficos e estatísticas.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📅</div>
-                <h3>Calendário de Treinos</h3>
-                <p>Organiza os teus treinos semanais e mensais.</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Community Icon">
+                <h3>Comunidade Ativa</h3>
+                <p>Partilha os teus resultados, troca dicas e motiva-te com outros entusiastas do fitness.</p>
             </div>
         </div>
     </section>
+
+    
     <!-- Pricing Section -->
     <section id="pricing" class="pricing">
         <div class="pricing-title">
@@ -95,7 +96,7 @@
                     <li>Registo de treinos</li>
                     <li>Calendário básico</li>
                 </ul>
-                <button class="btn btn-secondary">COMEÇAR AGORA</button>
+                <a href="{{ route('register') }}" class="btn btn-secondary" style="text-decoration: none; display: inline-block; text-align: center;">COMEÇAR AGORA</a>
             </div>
             <!-- Basic Plan (Popular) -->
             <div class="pricing-card popular">
@@ -108,7 +109,7 @@
                     <li>IA Personal Trainer</li>
                     <li>Planos personalizados</li>
                 </ul>
-                <button class="btn btn-primary">SUBSCREVER</button>
+                <a href="{{ route('register') }}" class="btn btn-primary" style="text-decoration: none; display: inline-block; text-align: center;">SUBSCREVER</a>
             </div>
             <!-- Premium Plan -->
             <div class="pricing-card">
@@ -121,15 +122,16 @@
                     <li>Suporte prioritário</li>
                     <li>Relatórios de progresso</li>
                 </ul>
-                <button class="btn btn-primary">SUBSCREVER</button>
+                <a href="{{ route('register') }}" class="btn btn-primary" style="text-decoration: none; display: inline-block; text-align: center;">SUBSCREVER</a>
             </div>
         </div>
     </section>
+
+    
     <!-- Footer -->
     <footer class="footer">
         <p><strong>LARAGYM</strong></p>
-        <p>© 2026 LaraGym. Powered by AI.</p>
-        <p><a href="https://app.emergent.sh/?utm_source=emergent-badge">Made with Emergent</a></p>
+        <p>© 2026 LaraGym PAP </p>
     </footer>
 </body>
 </html>

@@ -15,6 +15,11 @@ class Profile extends Model
         'address',
         'city',
         'state',
+        'weight',
+        'height',
+        'bmi',
+        'date_of_birth',
+        'gender',
         'country',
         'postcode',
         'newsletter'
