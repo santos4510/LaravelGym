@@ -41,6 +41,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        //criar um registro de perfil vazio para o utilizador recém-registado
+        $user->profile()->create();
+        $user->save();
+        
+
         event(new Registered($user));
 
         Auth::login($user);
