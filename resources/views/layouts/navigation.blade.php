@@ -18,9 +18,9 @@
                         class="text-gray-400 hover:text-neon transition-colors duration-300 border-none">
                         {{ __('inicio') }}
                     </x-nav-link>x
-                    <x-nav-link :href="route('dieta:active="request()->routeIs('dieta')" 
+                    <x-nav-link :href="route('dietas')" :active="request()->routeIs('dietas')" 
                         class="text-gray-400 hover:text-neon transition-colors duration-300 border-none">
-                        {{ __('dieta') }}
+                        {{ __('dietas') }}
                     </x-nav-link> 
                 </div>
             </div>

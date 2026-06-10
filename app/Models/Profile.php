@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\dieta;
 use App\Models\Traits\HasUser;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,8 +23,13 @@ class Profile extends Model
         'gender',
         'country',
         'postcode',
-        'newsletter'
+        'newsletter',
         'dieta_id'
     ];
 
+    // Relacionamento com a dieta ativa
+    public function dieta()
+    {
+        return $this->belongsTo(dieta::class, 'dieta_id');
+    }
 }

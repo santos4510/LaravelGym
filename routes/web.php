@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DietasController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,8 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/bmi/calculate', [ProfileController::class, 'calculateBmi'])->name('profile.bmi.calculate');
     Route::post('/profile/bmi/clear', [ProfileController::class, 'clearBmi'])->name('profile.bmi.clear');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/dietas', [DietaController::class, 'index']) ->middleware(['auth', 'verified'])->name('dietas');
-    });
+    Route::get('/dietas', [DietasController::class, 'index'])->name('dietas');
+    Route::get('/dietas/{id}', [DietasController::class, 'show'])->name('dietas.show');
+    Route::post('/dietas/activate/{id}', [DietasController::class, 'activate'])->name('dietas.activate');
+    Route::post('/dietas/deactivate', [DietasController::class, 'deactivate'])->name('dietas.deactivate');
 });
 
 require __DIR__.'/auth.php';

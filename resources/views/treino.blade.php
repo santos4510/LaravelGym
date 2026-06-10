@@ -84,12 +84,6 @@ if ($dia_selecionado < 1 || $dia_selecionado > 7) {
 $treino_do_dia = $rotina_treinos[$dia_selecionado];
 $nomes_dias = [1 => 'SEG', 2 => 'TER', 3 => 'QUA', 4 => 'QUI', 5 => 'SEX', 6 => 'SÁB', 7 => 'DOM'];
 ?>
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocolo de Treino Diário</title>
     <style>
         :root {
             --neon-green: #00ff41;
@@ -216,8 +210,6 @@ $nomes_dias = [1 => 'SEG', 2 => 'TER', 3 => 'QUA', 4 => 'QUI', 5 => 'SEX', 6 => 
             font-style: italic;
         }
     </style>
-</head>
-<body>
 
 <div class="container">
     <h1>[SISTEMA_TREINO] // PROTOCOLO_DIÁRIO</h1>
@@ -250,6 +242,3 @@ $nomes_dias = [1 => 'SEG', 2 => 'TER', 3 => 'QUA', 4 => 'QUI', 5 => 'SEX', 6 => 
         </ul>
     </div>
 </div>
-
-</body>
-</html>
