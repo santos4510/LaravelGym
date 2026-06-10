@@ -23,6 +23,7 @@ class Profile extends Model
         'country',
         'postcode',
         'newsletter'
+        'dieta_id'
     ];
 
 }

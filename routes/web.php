@@ -17,6 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/bmi/calculate', [ProfileController::class, 'calculateBmi'])->name('profile.bmi.calculate');
     Route::post('/profile/bmi/clear', [ProfileController::class, 'clearBmi'])->name('profile.bmi.clear');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dietas', [DietaController::class, 'index']) ->middleware(['auth', 'verified'])->name('dietas');
+    });
 });
 
 require __DIR__.'/auth.php';
