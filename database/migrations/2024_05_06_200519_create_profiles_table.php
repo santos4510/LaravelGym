@@ -19,11 +19,6 @@ return new class extends Migration {
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->double('weight')->nullable();
-            $table->double('height')->nullable();
-            $table->double('bmi')->nullable();
-            $table->date('date_of_birth')->nullable();
-            $table->string('gender')->nullable();
             $table->string('country')->nullable();
             $table->string('postcode')->nullable();
             $table->boolean('newsletter')->default(false);

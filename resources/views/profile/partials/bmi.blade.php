@@ -7,7 +7,7 @@
     </header>
 
         <div>
-            @if ($user->profile->bmi)
+            @if ($user->profile && $user->profile->bmi)
                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                     {{ $user->profile->bmi }}
                 </p>

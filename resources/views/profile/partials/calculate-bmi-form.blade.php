@@ -18,19 +18,19 @@
 
         <div>
             <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
-            <x-text-input id="date_of_birth" name="date_of_birth" value="{{ $user->profile->date_of_birth }}" type="date" class="mt-1 block w-full" required autofocus autocomplete="date_of_birth" />
+            <x-text-input id="date_of_birth" name="date_of_birth" value="{{ $user->profile->date_of_birth ?? '' }}" type="date" class="mt-1 block w-full" required autofocus autocomplete="date_of_birth" />
             <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
         </div>
 
         <div>
             <x-input-label for="height" :value="__('Height (cm)')" />
-            <x-text-input id="height" name="height" value="{{ $user->profile->height }}" type="number" class="mt-1 block w-full" required autofocus autocomplete="height" />
+            <x-text-input id="height" name="height" value="{{ $user->profile->height ?? '' }}" type="number" class="mt-1 block w-full" required autofocus autocomplete="height" />
             <x-input-error :messages="$errors->get('height')" class="mt-2" />
         </div>  
 
         <div>
             <x-input-label for="weight" :value="__('Weight (kg)')" />
-            <x-text-input id="weight" name="weight" value="{{ $user->profile->weight }}" type="number" class="mt-1 block w-full" required autocomplete="weight" />
+            <x-text-input id="weight" name="weight" value="{{ $user->profile->weight ?? ''}}" type="number" class="mt-1 block w-full" required autocomplete="weight" />
             <x-input-error :messages="$errors->get('weight')" class="mt-2" />
         </div>
 
@@ -38,9 +38,9 @@
             <x-primary-button>{{ __('Calculate BMI') }}</x-primary-button>
         </div>
         <div>
-            @if ($user->profile->bmi)
+            @if ($user->profile && $user->profile->bmi )
                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    {{ __('Your BMI is:') }} {{ $user->profile->bmi }}
+                    {{ __('Your BMI is:') }} {{ $user->profile->bmi ?? '' }}
                 </p>
             @endif
         </div>
